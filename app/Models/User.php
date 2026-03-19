@@ -4,12 +4,18 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
+    CONST TYPE_CUSTOMER = 1;
+    CONST TYPE_COMPANY_ADMIN = 2;
+    CONST TYPE_COMPANY_SUPPORT = 3;
+    CONST TYPE_SUPER_ADMIN = 4;
+
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable;
 
@@ -48,13 +54,23 @@ class User extends Authenticatable
         ];
     }
 
-    public function companies(): BelongsToMany
+    public function company(): BelongsTo
     {
-        return $this->belongsToMany(Company::class, 'company_users', 'user_id', 'company_id');
+        return $this->belongsTo(Company::class);
     }
 
-    public function isAdmin(): bool
+    public function tours(): HasMany
     {
-        return $this->companies()->where('type', 1)->exists();
+        return $this->hasMany(TourUser::class);
+    }
+
+    public function isCompanyAdmin(): bool
+    {
+        return $this->type === User::TYPE_COMPANY_ADMIN;
+    }
+
+    public function isSuperAdmin(): bool
+    {
+        return $this->type === User::TYPE_SUPER_ADMIN;
     }
 }

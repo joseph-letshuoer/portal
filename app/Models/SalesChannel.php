@@ -3,17 +3,18 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class Product extends Model
+class SalesChannel extends Model
 {
     public function company(): BelongsTo
     {
         return $this->belongsTo(Company::class);
     }
 
-    public function brand(): BelongsTo
+    public function brands(): BelongsToMany
     {
-        return $this->belongsTo(Brand::class);
+        return $this->belongsToMany(Brand::class, 'brand_sales_channels');
     }
 }

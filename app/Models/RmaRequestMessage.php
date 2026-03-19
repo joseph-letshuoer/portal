@@ -5,15 +5,15 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class UserContact extends Model
+class RmaRequestMessage extends Model
 {
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }
 
-    public function country(): BelongsTo
+    public function rmaRequest(): BelongsTo
     {
-        return $this->belongsTo(Country::class);
+        return $this->belongsTo(RmaRequest::class);
     }
 }

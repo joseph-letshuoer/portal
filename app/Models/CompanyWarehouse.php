@@ -5,15 +5,20 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class Product extends Model
+class CompanyWarehouse extends Model
 {
     public function company(): BelongsTo
     {
         return $this->belongsTo(Company::class);
     }
 
-    public function brand(): BelongsTo
+    public function country(): BelongsTo
     {
-        return $this->belongsTo(Brand::class);
+        return $this->belongsTo(Country::class);
+    }
+
+    public function region(): BelongsTo
+    {
+        return $this->belongsTo(CompanyRegion::class);
     }
 }

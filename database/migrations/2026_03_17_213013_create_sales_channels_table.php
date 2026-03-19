@@ -11,14 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('products', function (Blueprint $table) {
+        Schema::create('sales_channels', function (Blueprint $table) {
             $table->id();
             $table->foreignId('company_id')->constrained()->cascadeOnDelete();
-            $table->foreignId('company_brand_id')->nullable()->constrained()->cascadeOnDelete();
+            $table->foreignId('brand_id')->nullable()->constrained()->cascadeOnDelete();
             $table->string('name');
-            $table->string('website')->nullable();
-            $table->boolean('is_customizable')->default(false);
-            $table->boolean('is_active')->default(true);
             $table->timestamps();
         });
     }
@@ -28,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('products');
+        Schema::dropIfExists('sales_channels');
     }
 };

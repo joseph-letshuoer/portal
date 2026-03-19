@@ -5,11 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class Order extends Model
+class RmaRequestStatusUpdate extends Model
 {
-    public function company(): BelongsTo
+    public function rmaRequest(): BelongsTo
     {
-        return $this->belongsTo(Company::class);
+        return $this->belongsTo(RmaRequest::class);
     }
 
     public function user(): BelongsTo

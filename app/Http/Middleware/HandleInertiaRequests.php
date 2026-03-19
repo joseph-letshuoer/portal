@@ -40,8 +40,8 @@ class HandleInertiaRequests extends Middleware
         // Get user data and assert user roles
         $user = $request->user();
         if (!empty($user)) {
-            $user['is_admin'] = $user->isAdmin();
-            $user['company'] = $user->companies()->first()?->id;
+            $user['is_admin'] = $user->isSuperAdmin();
+            $user['company'] = $user->company?->id;
         }
 
         return [

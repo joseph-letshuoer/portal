@@ -11,16 +11,21 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('user_contact', function (Blueprint $table) {
+        Schema::create('company_warehousess', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('company_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('region_id')->nullable()->constrained()->cascadeOnDelete();
+            $table->string('company_name')->nullable();
+            $table->string('contact_name')->nullable();
+            $table->string('email')->nullable();
+            $table->string('phone')->nullable();
             $table->string('address_line1')->nullable();
             $table->string('address_line2')->nullable();
             $table->string('city')->nullable();
             $table->string('state_prov')->nullable();
+            $table->foreignId('country_id')->nullable()->constrained()->cascadeOnDelete();
             $table->string('postal_code')->nullable();
-            $table->foreignId('country_id')->constrained('countries')->cascadeOnDelete();
-            $table->string('phone')->nullable();
+            $table->boolean('is_active')->default(true);
             $table->timestamps();
         });
     }
@@ -30,6 +35,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('user_contact');
+        Schema::dropIfExists('company_warehousess');
     }
 };

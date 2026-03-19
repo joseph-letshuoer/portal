@@ -15,6 +15,7 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             CountriesSeeder::class,
             FaceplateShellSeeder::class,
+            RmaRequestStatusesSeeder::class,
         ]);
     }
 }
